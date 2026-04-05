@@ -10,9 +10,7 @@ void main() {
   runApp(const OffScanApp());
 }
 
-/// The root application widget.
-/// Enforces a strict dark theme to optimize for OLED battery savings
-/// and warehouse visibility.
+/// Main application entry point.
 class OffScanApp extends StatelessWidget {
   const OffScanApp({super.key});
 
@@ -34,9 +32,7 @@ class OffScanApp extends StatelessWidget {
   }
 }
 
-/// Core hardware state manager.
-/// Responsible for zero-state lifecycle synchronization of the camera
-/// and isolated QR/Barcode decoding streams.
+/// Main scanner screen.
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});
 
@@ -45,9 +41,7 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class _ScannerScreenState extends State<ScannerScreen> {
-  /// Instantiates a locked, generalized scanner controller.
-  /// Bound directly to the device ML Kit API constraints. Returns image buffers
-  /// to avoid secondary camera grabs upon rapid capture.
+  /// Controller for local ML Kit processing.
   final MobileScannerController _controller = MobileScannerController(
     formats: const [BarcodeFormat.all],
     returnImage: true,
@@ -58,8 +52,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   Uint8List? _frozenImage;
 
   // --- Barcode Detection ---
-  /// Triggered natively by the camera pipe when a barcode matches internal formats.
-  /// Terminates the visual scanning loop synchronously to restrict memory drift.
+  /// Processes camera feed and triggers sheet on detection.
   void _handleBarcode(BarcodeCapture capture) {
     if (!_isScanning) return;
     final barcodes = capture.barcodes;
@@ -75,8 +68,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 
   // --- Gallery Scan ---
-  /// Accesses device local storage to decode static images.
-  /// Verifies mounted state dynamically before async context execution to prevent build failures.
+  /// Scans barcodes from saved photos.
   Future<void> _scanFromGallery() async {
     HapticFeedback.vibrate();
     try {
@@ -484,8 +476,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 }
 
-/// Custom geometric painter for the viewfinder.
-/// Defines an optimized edge-radius rectangle without loading external vector layouts.
+/// Renders the target brackets in the center of the camera.
 class CornerPainter extends CustomPainter {
   const CornerPainter();
 

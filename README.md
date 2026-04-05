@@ -28,6 +28,3 @@ To build and install the project locally:
    flutter run --release
    ```
 
-## Support
-
-For feedback or questions, contact: cfungame@gmail.com
