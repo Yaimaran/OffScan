@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -10,6 +9,7 @@ void main() {
   runApp(const OffScanApp());
 }
 
+/// Main application entry point.
 class OffScanApp extends StatelessWidget {
   const OffScanApp({super.key});
 
@@ -31,6 +31,7 @@ class OffScanApp extends StatelessWidget {
   }
 }
 
+/// Main scanner screen.
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});
 
@@ -39,6 +40,7 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class _ScannerScreenState extends State<ScannerScreen> {
+  /// Controller for local ML Kit processing.
   final MobileScannerController _controller = MobileScannerController(
     formats: const [BarcodeFormat.all],
     returnImage: true,
@@ -49,6 +51,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   Uint8List? _frozenImage;
 
   // --- Barcode Detection ---
+  /// Processes camera feed and triggers sheet on detection.
   void _handleBarcode(BarcodeCapture capture) {
     if (!_isScanning) return;
     final barcodes = capture.barcodes;
@@ -64,6 +67,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 
   // --- Gallery Scan ---
+  /// Scans barcodes from saved photos.
   Future<void> _scanFromGallery() async {
     HapticFeedback.vibrate();
     try {
@@ -471,6 +475,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 }
 
+/// Renders the target brackets in the center of the camera.
 class CornerPainter extends CustomPainter {
   const CornerPainter();
 

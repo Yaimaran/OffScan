@@ -1,30 +1,24 @@
-# OffScan 🐻
-*A hyper-focused, strictly offline scanner built for speed.*
+# OffScan
 
-## What is this?
-OffScan is a minimalist 1D/2D barcode and QR scanner. It was built to solve a very specific, real-world bottleneck in the fast-paced logistics and delivery industry.
+An offline 1D/2D barcode and QR scanner.
 
-## The Problem
-Through direct feedback from delivery agents and warehouse logistics managers, we identified a major bottleneck they face every day: **Dead zones.** 
+OffScan is a Flutter application designed for environments with unreliable network connectivity, such as warehouses or delivery routes. 
 
-Delivery personnel constantly find themselves in elevators, underground parking lots, deep warehouse aisles, or rural areas with zero internet or spotty network coverage. Yet, almost all barcode scanning apps on the market either:
-* Require an active internet connection to process data.
-* Are bloated with third-party tracking and heavy corporate features, making them slow and laggy.
-* Are completely filled with intrusive popup ads that waste valuable time.
+## Motivation
 
-In a fast-paced environment where every second counts, a laggy or ad-filled scanner is incredibly frustrating.
+Many existing barcode scanners require an active internet connection to process data or contain third-party analytics SDKs that impact performance. OffScan processes all data locally on the device to ensure consistent performance in dead zones.
 
-## The Solution
-I built OffScan as a direct response to this validated demand. It does exactly one thing, and it does it instantly natively on the device.
+## Features
 
-*   **100% Offline:** It uses on-device ML hardware buffers. No internet connection is ever required to scan or copy data. It works perfectly in a basement.
-*   **Featherweight & Fast:** By stripping out unnecessary translation bloat and tracking, the entire app is tiny. It opens instantly and doesn't drain the battery.
-*   **No Ads, No Clutter:** A perfectly clean, minimalist interface optimized for one-handed operation. 
+* **Local Processing:** Utilizes on-device ML hardware buffers. No network calls are made during scanning.
+* **Minimal Footprint:** Stripped of non-essential dependencies and analytics to optimize start time and battery consumption.
+* **Simple Interface:** Optimized for one-handed operation without ads or popups.
 
 ## Installation 
-If you want to pull this code and install it yourself:
 
-1. Clone the repo:
+To build and install the project locally:
+
+1. Clone the repository:
    ```bash
    git clone https://github.com/Yaimaran/OffScan.git
    cd OffScan
