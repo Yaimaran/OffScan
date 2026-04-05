@@ -369,48 +369,58 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Gallery
-                  GestureDetector(
-                    onTap: _scanFromGallery,
-                    child: Container(
-                      width: 55, height: 55,
+                  Material(
+                    color: Colors.transparent,
+                    child: Ink(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 1.5),
                         color: Colors.black12,
                       ),
-                      child: const Icon(Icons.photo_library, color: Colors.white, size: 24),
+                      child: InkWell(
+                        customBorder: const CircleBorder(),
+                        onTap: _scanFromGallery,
+                        child: const SizedBox(
+                          width: 55, height: 55,
+                          child: Icon(Icons.photo_library, color: Colors.white, size: 24),
+                        ),
+                      ),
                     ),
                   ),
                   // Shutter
-                  GestureDetector(
-                    onTap: () {
-                      HapticFeedback.vibrate();
-                      if (_scanResult.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: Colors.white,
-                            content: const Text(
-                              'Searching... hold steady over a QR or barcode.',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            behavior: SnackBarBehavior.floating,
-                            duration: const Duration(seconds: 2),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          ),
-                        );
-                      }
-                    },
-                    child: Container(
+                  Material(
+                    color: Colors.transparent,
+                    child: Ink(
                       width: 80, height: 80,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white.withValues(alpha: 0.2),
                       ),
-                      child: Center(
-                        child: Container(
-                          width: 60, height: 60,
-                          decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                          child: const Icon(Icons.camera_alt, color: Colors.black87, size: 30),
+                      child: InkWell(
+                        customBorder: const CircleBorder(),
+                        onTap: () {
+                          HapticFeedback.vibrate();
+                          if (_scanResult.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.white,
+                                content: const Text(
+                                  'Searching... hold steady over a QR or barcode.',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                duration: const Duration(seconds: 2),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                            );
+                          }
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 60, height: 60,
+                            decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                            child: const Icon(Icons.camera_alt, color: Colors.black87, size: 30),
+                          ),
                         ),
                       ),
                     ),
@@ -420,21 +430,27 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     valueListenable: _controller,
                     builder: (context, state, _) {
                       final isOn = state.torchState == TorchState.on;
-                      return GestureDetector(
-                        onTap: () {
-                          HapticFeedback.vibrate();
-                          _controller.toggleTorch();
-                        },
-                        child: Container(
-                          width: 55, height: 55,
+                      return Material(
+                        color: Colors.transparent,
+                        child: Ink(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: isOn ? Colors.white : Colors.black12,
                           ),
-                          child: Icon(
-                            isOn ? Icons.flash_on : Icons.flash_off,
-                            color: isOn ? Colors.black87 : Colors.white,
-                            size: 24,
+                          child: InkWell(
+                            customBorder: const CircleBorder(),
+                            onTap: () {
+                              HapticFeedback.vibrate();
+                              _controller.toggleTorch();
+                            },
+                            child: SizedBox(
+                              width: 55, height: 55,
+                              child: Icon(
+                                isOn ? Icons.flash_on : Icons.flash_off,
+                                color: isOn ? Colors.black87 : Colors.white,
+                                size: 24,
+                              ),
+                            ),
                           ),
                         ),
                       );
