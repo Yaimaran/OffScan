@@ -253,7 +253,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                       onPressed: () async {
                         HapticFeedback.vibrate();
                         try {
-                          await Share.share(_scanResult, subject: 'OffScan Result');
+                          await SharePlus.instance.share(ShareParams(text: _scanResult, subject: 'OffScan Result'));
                         } catch (_) {}
                       },
                       icon: const Icon(Icons.share, size: 20),
@@ -404,7 +404,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                       width: 80, height: 80,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                       ),
                       child: Center(
                         child: Container(
@@ -461,7 +461,7 @@ class CornerPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.4)
+      ..color = Colors.white.withValues(alpha: 0.4)
       ..strokeWidth = 1.5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
