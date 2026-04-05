@@ -5,7 +5,7 @@
 OffScan is a minimalist 1D/2D barcode and QR scanner. It was built to solve a very specific, real-world bottleneck in the fast-paced logistics and delivery industry.
 
 ## The Problem
-A friend of mine—a delivery agent and warehouse logistics manager—pointed out a major problem they face every day: **Dead zones.** 
+Through direct feedback from delivery agents and warehouse logistics managers, we identified a major bottleneck they face every day: **Dead zones.** 
 
 Delivery personnel constantly find themselves in elevators, underground parking lots, deep warehouse aisles, or rural areas with zero internet or spotty network coverage. Yet, almost all barcode scanning apps on the market either:
 * Require an active internet connection to process data.
