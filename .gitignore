@@ -54,3 +54,6 @@ venv/
 *.jks
 android/key.properties
 ios/Runner/ExportOptions.plist
+
+# Local Release Binaries
+/release-builds/
