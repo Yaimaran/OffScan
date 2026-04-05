@@ -20,7 +20,6 @@ I built OffScan as a direct response to this validated demand. It does exactly o
 *   **100% Offline:** It uses on-device ML hardware buffers. No internet connection is ever required to scan or copy data. It works perfectly in a basement.
 *   **Featherweight & Fast:** By stripping out unnecessary translation bloat and tracking, the entire app is tiny. It opens instantly and doesn't drain the battery.
 *   **No Ads, No Clutter:** A perfectly clean, minimalist interface optimized for one-handed operation. 
-*   **Intuitive Interactions:** Pinch to optical zoom, subtle tap-to-focus, and instant haptic feedback when a tag is localized.
 
 ## Installation 
 If you want to pull this code and install it yourself:
