@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.offscan.app"
+    namespace = "com.example.offscan"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

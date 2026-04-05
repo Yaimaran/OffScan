@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -48,54 +47,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
   bool _isScanning = true;
   String _scanResult = '';
   Uint8List? _frozenImage;
-
-  // Pinch-to-zoom: track two pointers manually at the raw level
-  // so MobileScanner's internal GestureDetector can't swallow the events.
-  final Map<int, Offset> _pointers = {};
-  double? _initialPinchDistance;
-  double _zoomWhenPinchStarted = 0.0;
-  double _currentZoom = 0.0;
-
-  // --- Pointer handlers for pinch-to-zoom ---
-  void _onPointerDown(PointerDownEvent event) {
-    _pointers[event.pointer] = event.position;
-    if (_pointers.length == 2) {
-      _initialPinchDistance = _distanceBetweenPointers();
-      _zoomWhenPinchStarted = _currentZoom;
-    }
-  }
-
-  void _onPointerMove(PointerMoveEvent event) {
-    _pointers[event.pointer] = event.position;
-    if (_pointers.length == 2 && _initialPinchDistance != null && _frozenImage == null) {
-      final currentDistance = _distanceBetweenPointers();
-      final scale = currentDistance / _initialPinchDistance!;
-      final newZoom = (_zoomWhenPinchStarted + (scale - 1.0) * 0.4).clamp(0.0, 1.0);
-      if ((newZoom - _currentZoom).abs() > 0.01) {
-        _currentZoom = newZoom;
-        _controller.setZoomScale(_currentZoom);
-      }
-    }
-  }
-
-  void _onPointerUp(PointerUpEvent event) {
-    _pointers.remove(event.pointer);
-    if (_pointers.length < 2) {
-      _initialPinchDistance = null;
-    }
-  }
-
-  void _onPointerCancel(PointerCancelEvent event) {
-    _pointers.remove(event.pointer);
-    if (_pointers.length < 2) {
-      _initialPinchDistance = null;
-    }
-  }
-
-  double _distanceBetweenPointers() {
-    final points = _pointers.values.toList();
-    return (points[0] - points[1]).distance;
-  }
 
   // --- Barcode Detection ---
   void _handleBarcode(BarcodeCapture capture) {
@@ -193,7 +144,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
               const Text(
                 'Welcome to OffScan.\n\n'
                 '• Point your camera at any barcode or QR code.\n'
-                '• Pinch to zoom in on distant labels.\n'
                 '• Gallery icon (left) scans an existing image.\n'
                 '• Camera icon (center) triggers focus feedback.\n'
                 '• Flip icon (top-left) switches front/rear camera.\n\n'
@@ -340,17 +290,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Camera feed with raw pointer listener for pinch-to-zoom
-          Listener(
-            onPointerDown: _onPointerDown,
-            onPointerMove: _onPointerMove,
-            onPointerUp: _onPointerUp,
-            onPointerCancel: _onPointerCancel,
-            child: MobileScanner(
-              controller: _controller,
-              onDetect: _handleBarcode,
-              tapToFocus: true,
-            ),
+          // Camera feed 
+          MobileScanner(
+            controller: _controller,
+            onDetect: _handleBarcode,
           ),
 
           // Frozen image overlay
