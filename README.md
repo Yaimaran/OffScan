@@ -27,4 +27,3 @@ To build and install the project locally:
    ```bash
    flutter run --release
    ```
-
