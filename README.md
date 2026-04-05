@@ -33,7 +33,3 @@ If you want to pull this code and install it yourself:
    ```bash
    flutter run --release
    ```
-
-## Support & Contact 
-For feedback, questions, or just to say hi:
-**cfungame@gmail.com**
